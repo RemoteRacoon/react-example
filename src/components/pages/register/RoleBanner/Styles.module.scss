@@ -1,0 +1,22 @@
+@use 'colors';
+@use 'mixins';
+@use 'env';
+
+.role {
+  top: map-get(env.$app, 'header-hight' );
+  right: 0;
+  position: absolute;
+  @include mixins.flex(flex, row, center);
+  background-color: colors.$liberty_60;
+  height: 827px;
+  width: 672px;
+  transition: all .4s;
+
+
+  @media screen and (max-width: 1320px) {
+    & {
+      display: none;
+    }
+  }
+
+}

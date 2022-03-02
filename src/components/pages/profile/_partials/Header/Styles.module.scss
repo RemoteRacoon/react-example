@@ -1,0 +1,60 @@
+@use 'mixins' as *;
+@use 'colors' as *;
+
+.header {
+  @include flex(flex, row, center, space-between);
+  margin-top: 24px;
+  width: 100%;
+
+  .text {
+    font-family: 'PlayBold';
+  }
+
+  &__profile {
+    @extend .text;
+  }
+
+  &__isSeller {
+    @extend .text;
+    color: $liberty_20;
+  }
+}
+
+.navbar {
+  position: relative;
+  @include flex(flex, row, center, center);
+  margin-top: 40px;
+  gap: 24px;
+
+  & > div {
+    flex-grow: 1;
+  }
+
+  .link {
+    @include flex(flex, row, center, flex-start);
+    flex-grow: 1;
+    height: 40px;
+    padding: 8px 16px;
+    background-color: $liberty_10;
+    color: $primaryBlack;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .link-active {
+    @extend .link;
+    color: $primaryWhite;
+    background-color: $primaryBlue;
+  }
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    content: '';
+    height: 1px;
+    width: 100vw;
+    background-color: $liberty_10;
+  }
+}

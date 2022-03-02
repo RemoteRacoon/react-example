@@ -1,0 +1,82 @@
+@use 'mixins' as *;
+@use 'colors' as *;
+
+.user {
+  @include flex(flex, row, stretch, space-between);
+  flex-grow: 1;
+  color: $primaryWhite;
+
+  .child {
+    flex-grow: 1;
+    transition: all .4s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $liberty_50;
+    }
+  }
+
+  .lots {
+    @extend .child;
+    @include flex(flex, row, center, center);
+  }
+
+  .deposit {
+    @extend .child;
+    @include flex(flex, column, stretch, center);
+
+    & > * {
+      @include flex(flex, row, center, flex-start);
+    }
+
+    &__info {
+      @include flex(flex, row, center, space-between);
+      gap: 32px;
+      margin-bottom: 10px;
+    }
+
+    &__warning {
+      @include flex(flex, row, stretch, flex-start);
+      color: $primaryPurple;
+      flex-grow: 1;
+    }
+
+    &__bank {
+      margin-bottom: 4px;
+    }
+
+    &__account {
+      width: 95px;
+      @include textSmall(true);
+      margin-right: 8px;
+    }
+
+    &__figures {
+      @include textSmall;
+    }
+  }
+
+  .notification {
+    @extend .child;
+    @include flex(flex, row, center, center);
+  }
+
+  .organization {
+    @extend .child;
+    @include flex(flex, row, center, center);
+    gap: 24px;
+
+    &__contact {
+      @include flex(flex, column, flex-start, stretch);
+      gap: 1px;
+    }
+
+    &__owner {
+      @include textSmall(true);
+    }
+
+    &__brand {
+      @include flex(flex, row, center, center);
+    }
+  }
+}

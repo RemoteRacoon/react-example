@@ -1,0 +1,42 @@
+@use "colors";
+@use 'mixins';
+@use "env";
+
+.overlay-scrollable {
+  z-index: map-get(env.$app, 'modal-index');
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 110vh;
+  width: 100%;
+  @include mixins.scrollableY;
+
+  .overlay-clickable {
+    min-height: 100%;
+    background-color: rgba(18, 21, 43, .4);
+    @include mixins.flex(flex, row, flex-start, center);
+
+    .modal {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      min-height: 400px;
+      margin: map-get(env.$app, 'header-hight') auto;
+      border-radius: 4px;
+      background-color: colors.$primaryWhite;
+      box-shadow: 0px 4px 16px rgba(30, 33, 43, 0.32);
+    }
+    
+    .modal__close {
+      position: absolute !important;
+      display: flex;
+      align-items: center;
+      top: 24px !important;
+      right: 32px !important;
+      cursor: pointer;
+      z-index: map-get(env.$app, 'modal-index') + 1;
+    }
+  }
+}
+
+

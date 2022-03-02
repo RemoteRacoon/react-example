@@ -1,0 +1,59 @@
+@use 'colors';
+@use 'mixins';
+
+.container {
+  @include mixins.flex(flex, row, center, space-between);
+
+  .control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 50%;
+  }
+}
+
+.input {
+  appearance: none;
+
+  & + label {
+    display: inline-flex;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  & + label::before {
+    display: inline-block;
+    content: '';
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    border: 3px solid colors.$liberty_10;
+    border-radius: 50%;
+    background-size: 50% 50%;
+    background-position: center center;
+    background-color: colors.$liberty_10;
+  }
+
+  &:hover + label::before {
+    cursor: pointer;
+  }
+
+  &:checked + label::before {
+    @extend .input-checked;
+    background-color: colors.$primaryBlue;
+  }
+
+  &:checked:disabled + label::before {
+    @extend .input-checked;
+    background-color: lighten(colors.$primaryBlue, 30%);
+  }
+}
+
+.input-checked {
+  border: 3px solid colors.$liberty_10;
+  width: 15px;
+  height: 15px;
+}

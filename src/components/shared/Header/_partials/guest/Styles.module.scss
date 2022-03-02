@@ -1,0 +1,13 @@
+@use 'mixins' as *;
+
+.guest {
+  display: flex;
+  gap: 16px;
+
+  @include phone-and-tablet {
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+  }
+}
+

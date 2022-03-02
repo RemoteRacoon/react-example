@@ -1,0 +1,54 @@
+@use 'colors';
+@use 'mixins';
+
+.button {
+  @include mixins.flex(inline-flex, row, center, center);
+  gap: 16px;
+  height: auto;
+  appearance: none;
+  border-radius: 3px;
+  padding: 8px 24px;
+  border: none;
+  transition: background-color .4s;
+  min-width: 80px;
+  line-height: 150%;
+
+  &:focus {
+    outline: 2px solid colors.$liberty_20;
+  }
+  
+}
+
+.button-primary {
+  @extend .button;
+  background-color: colors.$primaryBlue;
+}
+
+.button-primary-outlined {
+  @extend .button;
+  border: 1px solid colors.$primaryBlue;
+  color: colors.$primaryBlue;
+  background-color: transparent;
+
+  &:hover {
+    @extend .button-primary-contained;
+  }
+}
+
+.button-primary-contained {
+  @extend .button;
+  border: 1px solid transparent;
+  color: colors.$primaryWhite;
+  background-color: colors.$primaryBlue;
+  font-weight: medium;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: colors.$primaryBlue, $amount: 10%);
+  }
+
+  &:disabled {
+    background-color: lighten($color: colors.$primaryBlue, $amount: 15%);
+    cursor: auto;
+  }
+}

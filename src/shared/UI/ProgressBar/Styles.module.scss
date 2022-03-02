@@ -1,0 +1,30 @@
+@use 'colors' as *;
+@use 'mixins' as *;
+
+.progress {
+  @include flex(flex, column, flex-end, flex-start);
+  gap: 8px;
+}
+
+.progress__text {
+  @include textSmall(true);
+}
+
+
+.progress__bar {
+  position: relative;
+  width: 200px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: $liberty_10;
+  overflow: hidden;
+}
+
+.progress__result {
+  position: absolute;
+  transition: all .4s;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #1F81C2 0%, #8E35A6 100%);
+}

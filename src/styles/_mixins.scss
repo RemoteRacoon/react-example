@@ -1,0 +1,48 @@
+@use 'colors';
+
+@mixin flex(
+ $display: flex,
+ $direction: row,
+ $align-items: center,
+ $justify-content: space-evenly,
+ $wrap: wrap
+) {
+  display: $display;
+  flex-flow: $direction $wrap;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+@mixin textSmall($muted: false) {
+  font-size: 12px;
+  line-height: 15.6px;
+  
+  @if $muted {
+    color: colors.$liberty_20;
+  }
+}
+
+@mixin headMain {
+  font-size: 24px;
+}
+
+@mixin box {
+  border-radius: 4px;
+}
+
+@mixin link {
+  color: colors.$primaryBlue;
+  cursor: pointer;
+}
+
+@mixin scrollableY {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+
+@mixin phone-and-tablet {
+  @media screen and (max-width: 600px) {
+    @content;
+  }
+}

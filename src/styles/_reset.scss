@@ -1,0 +1,50 @@
+@use 'colors' as *;
+// @import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'InterRegular', sans-serif;
+  font-size: 16px;
+}
+
+html, body, #__next {
+  min-height: 110vh;
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $liberty_60;
+  margin-right: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $liberty_50;
+  border-radius: 10px;
+
+  &:hover {
+    background: $liberty_20;
+  }
+}
+
+input[type=tel] {
+  user-select: text;
+}

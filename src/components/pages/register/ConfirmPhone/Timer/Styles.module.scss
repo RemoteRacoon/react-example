@@ -1,0 +1,11 @@
+@use 'mixins';
+
+.timer {
+  @include mixins.flex(flex, column, center, center);
+
+  & > span {
+    @include mixins.textSmall($muted: true);
+
+  }
+  margin-top: 32px;
+}

@@ -1,0 +1,13 @@
+@use 'colors';
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 12px;
+    line-height: 15.6px;
+    color: colors.$liberty_20;
+  }
+}

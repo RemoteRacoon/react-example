@@ -1,0 +1,44 @@
+{
+  "name": "next-sass",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cookie": "^0.4.1",
+    "deepdash-es": "^5.3.9",
+    "file-saver": "^2.0.5",
+    "formik": "^2.2.9",
+    "lodash": "^4.17.21",
+    "next": "12.0.7",
+    "qs": "^6.10.3",
+    "react": "17.0.2",
+    "react-cookie": "^4.1.1",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "react-transition-group": "^4.4.2",
+    "sweet-pubsub": "^1.1.2",
+    "swr": "^1.2.1",
+    "typescript": "^4.5.4",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5",
+    "@types/lodash": "^4.14.178",
+    "@types/qs": "^6.9.7",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-dropzone": "^5.1.0",
+    "@types/react-phone-number-input": "^3.0.13",
+    "@types/react-transition-group": "^4.4.4",
+    "@types/sweet-pubsub": "^1.1.0",
+    "eslint": "8.4.1",
+    "eslint-config-next": "12.0.7",
+    "react-dropzone": "^12.0.0",
+    "sass": "^1.45.1"
+  }
+}

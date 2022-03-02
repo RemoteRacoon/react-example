@@ -1,0 +1,29 @@
+@use 'mixins';
+@use 'colors';
+
+.container {
+  @include mixins.flex(flex, row, center, flex-start);
+  margin: 95px 0px;
+  width: 512px;
+
+  @media screen and (max-width: 1305px) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .checkbox-label {
+    &, > *{ 
+      @include mixins.textSmall;
+    }
+
+    color: colors.$liberty_20;
+
+    .link {
+      @include mixins.link
+    }
+  }
+
+  .submit-button {
+    margin-top: 35px;
+  }
+}

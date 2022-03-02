@@ -1,0 +1,47 @@
+@use 'mixins' as *;
+@use 'colors' as *;
+
+.form {
+  margin-top: 54px;
+  @include flex(flex, column, stretch, flex-start);
+
+  &__block {
+    --gap: 24px;
+    @include flex(flex, row, center, space-between);
+    @include box;
+    gap: var(--gap);
+    padding: 24px 46px 40px 46px;
+    background-color: $liberty_0;
+  }
+
+  
+  &__control {
+    width: calc(50% - var(--gap));
+
+    @media screen and (max-width: 1100px) {
+      width: 100%;
+    }
+  }
+
+  
+  &__header {
+    @include flex(flex, row, center, space-between);
+    width: 100%;
+    margin-bottom: calc(40px - var(--gap));
+
+    @media screen and (max-width: 770px) {
+      @include flex(flex, column, center, flex-start);
+      gap: 24px;
+    }
+  }
+
+  &__title {
+    font-family: 'InterLight';
+    font-size: 16px;
+  }
+
+  &__tip {
+    font-size: 1em;
+  }
+
+}

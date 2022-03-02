@@ -1,0 +1,11 @@
+@use 'sizes' as *;
+@use 'mixins' as *;
+
+.app {
+  @include flex(flex, column, space-around, flex-start);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  min-height: 100vh;
+  padding: 0 48px;
+  width: 100%;
+}

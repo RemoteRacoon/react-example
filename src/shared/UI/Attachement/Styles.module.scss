@@ -1,0 +1,70 @@
+@import "colors";
+@import "mixins";
+
+.container {
+  @include flex(column, space-around, flex-start);
+  gap: 7px;
+}
+
+.input {
+  display: none
+}
+
+.file {
+  padding-left: 32px;
+}
+
+.error-area {
+  display: inline-flex;
+  flex-direction: column
+}
+
+.dropbox {
+  @include flex(column, center, center);
+  position: relative;
+  gap: 11px;
+  height: 97px;
+  background-color: $liberty_10;
+  color: $liberty_20;
+  
+  &:hover {
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 12px;
+    line-height: 15.6px;
+  }
+}
+
+.dropbox-bordered {
+  @extend .dropbox;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border: 3px dashed black;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+  }
+}
+
+.button {
+  color: $liberty_30;
+}
+
+.container {
+  position: relative;
+
+  &__success {
+    @include flex();
+    position: absolute;
+    top: 0;
+    left: 100%;
+    bottom: 0;
+    width: fit-content;
+    margin-left: 22.75px
+  }
+}

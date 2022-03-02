@@ -1,0 +1,41 @@
+@use 'mixins';
+
+.info {
+  line-height: 24px;
+  text-align: center;
+}
+
+.form {
+  margin-top: 24px;
+
+  label {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+
+  .input {
+    width: 100%;
+    text-align: center;
+
+    &::placeholder {
+      text-align: center;
+    }
+
+  }
+
+}
+
+.no-sms {
+  @include mixins.textSmall;
+  @include mixins.link;
+}
+
+.timer {
+  @include mixins.flex(flex, column, center, center);
+
+  & > span {
+    @include mixins.textSmall($muted: true);
+
+  }
+  margin-top: 32px;
+}

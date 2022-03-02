@@ -1,0 +1,67 @@
+@use 'mixins' as *;
+@use 'colors' as *;
+
+.checkbox {
+  display: block;
+  position: relative;
+  @include flex(inline-flex, row, center, flex-start);
+  padding-left: 32px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .checkmark {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 4px;
+    background-color: $liberty_10;
+    pointer-events: none;
+  }
+
+  .input {
+    position: absolute;
+    appearance: none;
+    left: 0;
+    width: 24px;
+    height: 24px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus + .checkmark {
+      outline: 2px solid $liberty_20;
+    }
+
+    &:checked + .checkmark::after {
+      @extend .checkmark-content;
+      border: solid $primaryBlue;
+    }
+
+    &:checked:disabled + .checkmark::after {
+     @extend .checkmark-content;
+     border: solid lighten($primaryBlue, 30%);
+    }
+  }
+}
+
+.checkmark-content {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 8.3px;
+  height: 5.6px;
+  border-radius: .5px;
+  top: 5px;
+  border-width: 0px 0px 3px 3px;
+  transform: rotate(-45deg);
+}

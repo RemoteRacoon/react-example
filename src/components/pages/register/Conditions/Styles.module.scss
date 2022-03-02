@@ -1,0 +1,65 @@
+@use 'colors' as *;
+
+.conditions {
+  margin-top: 40px;
+  width: 100%;
+  min-height: 584.667px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  a{
+    color: $links_color;
+  }
+}
+
+.conditions__title {
+  color: $primaryBlue;
+  display: flex;
+  gap: 8px;
+}
+
+.conditions__index {
+  font-weight: bold;
+}
+
+.conditions__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conditions__list {
+  display: flex;
+  padding: 16px 16px 47px 16px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.conditions__list-toggled {
+  transition: all .4s;
+  display: none;
+}
+
+
+.conditions__itemsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.conditions__item {
+  display: flex;
+  gap: 8px;
+  color: $primaryBlue;
+}
+
+.conditions__toggle:hover {
+  cursor: pointer;
+}
+
+.conditions__splitter {
+  margin-top: 16px;
+  background-color: $primaryBlue;
+}

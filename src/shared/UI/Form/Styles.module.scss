@@ -1,0 +1,61 @@
+@use 'mixins';
+@use 'colors';
+
+.form {
+  @include mixins.flex(flex, column, space-around);
+  width: 100%;
+  gap: 16px;
+}
+
+.form-heading {
+  @include mixins.headMain;
+
+  @media screen and (max-width: 575px) {
+    text-align: center;
+  }
+}
+
+.form-control {
+  position: relative;
+  @include mixins.flex(flex, column, space-around);
+  gap: 8px;
+}
+
+.form-label {
+  @include mixins.textSmall;
+  color: colors.$liberty_20;
+  margin-left: 16px;
+}
+
+
+.form-hint {
+  position: absolute;
+  @include mixins.textSmall;
+  margin-top: 4px;
+  top: 100%;
+  text-align: right;
+}
+
+
+.tip {
+  @extend .form-hint;
+  left: 0;
+  color: colors.$liberty_20;
+}
+
+.error {
+  @extend .form-hint;
+  right: 0;
+  color: colors.$primaryPurple;
+}
+
+.sign {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+
+.processing {
+  @extend .sign;
+  color: grey;
+}

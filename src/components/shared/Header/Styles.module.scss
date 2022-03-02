@@ -1,0 +1,34 @@
+@use 'colors';
+@use 'mixins' as *;
+@use 'env';
+
+.header {
+  @include flex(flex, row, center, space-between);
+  padding: 0 48px;
+  width: 100%;
+  height: map-get(env.$app, 'header-hight' );
+  background-color: colors.$liberty_60;
+
+  
+  .logo {
+    @include flex(flex, row, center, center);
+    width: 100px;
+  }
+
+
+  @include phone-and-tablet {
+    @include flex(flex, column, center, center);
+    height: map-get(env.$app, 'header-hight-mobile');
+    gap: 20%;
+
+    .logo {
+      margin-top: 36px;
+    }
+  }
+}
+
+.header-user {
+  @extend .header;
+  @include flex(flex, row, stretch, flex-start);
+  gap: 314px;
+}
