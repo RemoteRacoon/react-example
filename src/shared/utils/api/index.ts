@@ -24,7 +24,6 @@ const defaults = {
 export type ApiOptions = {
   withFile?: boolean, // флаг необходим для того, чтобы формировать FormData или обычный JSON объект
   downloadInstantly?: boolean, // скачиваем файл из заголовка content-type: disposition
-  shouldStayUnauthorized?: boolean, // например, если отправляем запрос, но хотим, чтобы на 401 нас не выкидывало со страницы
 }
 interface ApiI extends ApiOptions {
   method: Method,
@@ -40,7 +39,6 @@ const request = <T extends ApiI>(params: T) => new Promise<any>((resolve, reject
     variables,
     withFile,
     downloadInstantly,
-    shouldStayUnauthorized,
     ctx,
   } = params;
 
@@ -79,9 +77,7 @@ const request = <T extends ApiI>(params: T) => new Promise<any>((resolve, reject
               removeAuth(ctx);
             }
 
-            if (!shouldStayUnauthorized) {
-              redirect('/?login=true', ctx);
-            }
+            redirect('/?login=true', ctx);
           } else {
             reject(error.response.data);
           }

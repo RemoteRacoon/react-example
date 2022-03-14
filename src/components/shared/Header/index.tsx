@@ -1,17 +1,25 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import BrandIcon from '@/icons/Brand/logo_gradient.svg';
 import styles from './Styles.module.scss';
 import Image from 'next/image';
 import Link from "next/link";
 import Guest from "./_partials/guest";
 import PartialUser from './_partials/user';
-import useUser from "services/UserService/swr/useUser";
+import { getToken } from "shared/utils/auth";
 
 const Header: FC = () => {
-  const user = 0;
+  const hasToken = !!getToken();
+  const childComponent = hasToken ? () => <PartialUser /> : () => <Guest />
+  const [headerStyles, setHeaderStyles] = useState(styles.header);
+
+  useEffect(() => {
+    if (hasToken) {
+      setHeaderStyles(styles['header-user']);
+    }
+  }, [hasToken]);
 
   return (
-    <div className={user ? styles['header-user'] : styles.header}>
+    <div className={headerStyles}>
       <div className={styles.logo}>
         <Link href='/' passHref>
           <a className={styles.logo}>
@@ -22,10 +30,7 @@ const Header: FC = () => {
           </a>
         </Link>
       </div>
-
-
-      <Guest />
-
+      {process.browser && childComponent()}
     </div>
   )
 }

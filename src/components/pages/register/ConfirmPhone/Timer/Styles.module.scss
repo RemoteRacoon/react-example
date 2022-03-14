@@ -1,11 +1,17 @@
-@use 'mixins';
+@use 'colors';
 
 .timer {
-  @include mixins.flex(flex, column, center, center);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   & > span {
-    @include mixins.textSmall($muted: true);
-
+    font-size: 12px;
+    line-height: 15.6px;
+    color: colors.$primaryBlue;
+    cursor: pointer;
   }
+  
   margin-top: 32px;
 }

@@ -1,12 +1,12 @@
 @use 'colors';
-@use 'mixins';
-@use 'env';
 
 .role {
-  top: map-get(env.$app, 'header-hight' );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 100px;
   right: 0;
   position: absolute;
-  @include mixins.flex(flex, row, center);
   background-color: colors.$liberty_60;
   height: 827px;
   width: 672px;

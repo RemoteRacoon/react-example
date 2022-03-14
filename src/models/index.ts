@@ -1,0 +1,10 @@
+export type { default as EntityI } from './Entity';
+export type { default as UserI } from './User';
+export type { default as OrganizationI } from './Organization';
+export type { default as BankDetailsI } from './BankDetails';
+export type { default as EntitlementDocumentI } from './EntitlementDocument';
+export type { default as ProductI } from './Product';
+export type { default as DealI } from './Deal';
+export type { default as UploadedFileI } from './UploadedFile';
+export type { default as BasisI } from './Basis';
+export type { default as ManufacturerI } from './Manufacturer';

@@ -1,4 +1,4 @@
-@use 'mixins';
+@use 'colors';
 
 .info {
   line-height: 24px;
@@ -15,7 +15,10 @@
 
   .input {
     width: 100%;
-    text-align: center;
+    
+    input {
+      text-align: center
+    };
 
     &::placeholder {
       text-align: center;
@@ -26,16 +29,22 @@
 }
 
 .no-sms {
-  @include mixins.textSmall;
-  @include mixins.link;
+  font-size: 12px;
+  line-height: 15.6px;
+  color: colors.$primaryBlue;
+  cursor: pointer;
 }
 
 .timer {
-  @include mixins.flex(flex, column, center, center);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   & > span {
-    @include mixins.textSmall($muted: true);
-
+    font-size: 12px;
+    line-height: 15.6px;
+    color: colors.$liberty_20;
   }
   margin-top: 32px;
 }

@@ -1,10 +1,12 @@
-@use 'mixins' as *;
-@use 'colors' as *;
+@use 'colors';
 
 .user {
-  @include flex(flex, row, stretch, space-between);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
   flex-grow: 1;
-  color: $primaryWhite;
+  height: 100%;
+  color: colors.$primaryWhite;
 
   .child {
     flex-grow: 1;
@@ -12,32 +14,43 @@
 
     &:hover {
       cursor: pointer;
-      background-color: $liberty_50;
+      background-color: colors.$liberty_50;
     }
   }
 
   .lots {
     @extend .child;
-    @include flex(flex, row, center, center);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .deposit {
     @extend .child;
-    @include flex(flex, column, stretch, center);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
 
     & > * {
-      @include flex(flex, row, center, flex-start);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     &__info {
-      @include flex(flex, row, center, space-between);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 32px;
       margin-bottom: 10px;
     }
 
     &__warning {
-      @include flex(flex, row, stretch, flex-start);
-      color: $primaryPurple;
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch;
+      color: colors.$primaryPurple;
       flex-grow: 1;
     }
 
@@ -47,36 +60,50 @@
 
     &__account {
       width: 95px;
-      @include textSmall(true);
+      font-size: 12px;
+      line-height: 15.6px;
+      color: colors.$liberty_20;
       margin-right: 8px;
     }
 
     &__figures {
-      @include textSmall;
+      font-size: 12px;
+      line-height: 15.6px;
     }
   }
 
   .notification {
     @extend .child;
-    @include flex(flex, row, center, center);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .organization {
     @extend .child;
-    @include flex(flex, row, center, center);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 24px;
 
     &__contact {
-      @include flex(flex, column, flex-start, stretch);
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      align-items: flex-start;
       gap: 1px;
     }
 
     &__owner {
-      @include textSmall(true);
+      font-size: 12px;
+      line-height: 15.6px;
+      color: colors.$liberty_20;
     }
 
     &__brand {
-      @include flex(flex, row, center, center);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

@@ -4,19 +4,26 @@ import Image from 'next/image';
 import BuyerBrand from '@/icons/Buyer/Buyer.svg';
 import WarningIcon from '@/UI/Icons/Warning';
 import BellIcon from '@/UI/Icons/Bell';
-import { UserI } from 'models/User';
 import { formatFio } from 'shared/utils/misc';
 import { pick } from 'lodash';
+import getUser from 'services/UserService/swr/getUser';
+import toast from 'shared/utils/toast';
 
-interface PartialUserI {
-  user: UserI;
-}
+const Header_partial_user: FC = () => {
+  const { user, isUserLoading, error } = getUser(null, { revalidateOnFocus: false });
 
-const Header_partial_user: FC<PartialUserI> = ({ user }) => {
+  if (isUserLoading) {
+    return <div>Данные подгружаются...</div>
+  }
+
+  if (error) {
+    toast.error(error.message);
+  }
+
   return (
     <div className={styles.user}>
       <div className={styles.lots}>
-        {user?.organization.isSeller ? 'Лоты и сделки' : 'Сделки'}
+        {user.organization.isSeller ? 'Лоты и сделки' : 'Сделки'}
       </div>
 
       <div className={styles.deposit}>
@@ -31,7 +38,7 @@ const Header_partial_user: FC<PartialUserI> = ({ user }) => {
             Свободно:
           </span>
           <span className={styles.deposit__figures}>
-            100000
+            {user.organization.balance}
           </span>
         </div>
         <div className={styles.deposit__bank}>
@@ -39,7 +46,7 @@ const Header_partial_user: FC<PartialUserI> = ({ user }) => {
             Заблокировано:
           </span>
           <span className={styles.deposit__figures}>
-            100000
+            {user.organization.blockedSum}
           </span>
         </div>
       </div>
@@ -51,7 +58,7 @@ const Header_partial_user: FC<PartialUserI> = ({ user }) => {
       <div className={styles.organization}>
         <div className={styles.organization__contact}>
           <span>
-            {user?.organization.name}
+            {user.organization.name}
           </span>
           <span className={styles.organization__owner}>
             {formatFio(pick(user, ['firstName', 'lastName', 'patronymicName']))}

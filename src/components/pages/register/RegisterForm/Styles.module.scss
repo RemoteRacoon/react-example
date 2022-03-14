@@ -1,8 +1,9 @@
-@use 'mixins';
 @use 'colors';
 
 .container {
-  @include mixins.flex(flex, row, center, flex-start);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   margin: 95px 0px;
   width: 512px;
 
@@ -13,13 +14,15 @@
 
   .checkbox-label {
     &, > *{ 
-      @include mixins.textSmall;
+      font-size: 12px;
+      line-height: 15.6px;
     }
 
     color: colors.$liberty_20;
 
     .link {
-      @include mixins.link
+      color: colors.$primaryBlue;
+      cursor: pointer;
     }
   }
 

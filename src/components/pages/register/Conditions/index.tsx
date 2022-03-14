@@ -6,31 +6,14 @@ import Plus from '@/icons/Toggle/plus.svg';
 import classes from './Styles.module.scss';
 import Link from 'next/link';
 import Splitter from 'components/shared/Splitter';
+import classNames from 'classnames';
 
 const RegisterConditions: FC = () => {
   const $firstToggled = useRef<boolean>(false);
   const $secondToggled = useRef<boolean>(false);
 
-  const [firtCondCls, setFirstCondCls] = useState([classes.conditions__list]);
-  const [secondCondCls, setSecondCondCls] = useState([classes.conditions__list]);
-
-  const toggleFirst = () => {
-    if ($firstToggled.current) {
-      setFirstCondCls([classes.conditions__list]);
-    } else {
-      setFirstCondCls((prev) => ([...prev, classes['conditions__list-toggled']]));
-    }
-    $firstToggled.current = !$firstToggled.current;
-  };
-
-  const toggleSecond = () => {
-    if ($secondToggled.current) {
-      setSecondCondCls([classes.conditions__list]);
-    } else {
-      setSecondCondCls((prev) => ([...prev, classes['conditions__list-toggled']]));
-    }
-    $secondToggled.current = !$secondToggled.current;
-  };
+  const [firstToggled, setFirstToggled] = useState(false);
+  const [secondToggled, setSecondToggled] = useState(false);
 
   return (
     <div className={classes.conditions}>
@@ -43,13 +26,13 @@ const RegisterConditions: FC = () => {
           </div>
           <Image
             src={$firstToggled.current ? Plus : Minus}
-            onClick={toggleFirst}
+            onClick={() => setFirstToggled(t => !t)}
             className={classes.conditions__toggle}
             alt={$firstToggled.current ? 'Показать' : 'Скрыть'}
           />
         </div>
         <Splitter customClasses={classes.conditions__splitter} />
-        <div className={firtCondCls.join(' ')}>
+        <div className={classNames(classes.conditions_list, { [classes['conditions__list-toggled']]: firstToggled })}>
           <p>
             Предлагаем ознакомиться с типовыми формой договора,
             приложений и дополнительных соглашений к нему.
@@ -97,13 +80,13 @@ const RegisterConditions: FC = () => {
           </div>
           <Image
             src={$secondToggled.current ? Plus : Minus}
-            onClick={toggleSecond}
+            onClick={() => setSecondToggled(t => !t)}
             className={classes.conditions__toggle}
             alt={$firstToggled.current ? 'Показать' : 'Скрыть'}
           />
         </div>
         <Splitter customClasses={classes.conditions__splitter} />
-        <div className={secondCondCls.join(' ')}>
+        <div className={classNames(classes.conditions_list, { [classes['conditions__list-toggled']]: secondToggled })}>
           <p>
             Предлагаем ознакомиться с типовыми формой договора,
             приложений и дополнительных соглашений к нему.

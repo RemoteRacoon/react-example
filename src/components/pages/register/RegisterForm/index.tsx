@@ -1,39 +1,36 @@
 import styles from './Styles.module.scss';
 import { FC, useContext, useState } from 'react';
-import User from 'models/User';
-import { Organization } from 'models/Organization';
 import RegisterCtx from '../RegisterContext';
 import Form from '@/UI/Form';
 import SubmitButton from '@/UI/Form/SubmitButton';
-import RegisterService, { RegisterFormI } from 'services/RegisterService';
-import { omit } from 'lodash';
+import RegisterService from 'services/RegisterService';
+import { get, omit } from 'lodash';
+import { defaults, OrgRole, OrgType, ORG_ROLES, ORG_TYPES } from 'models/Organization';
+import { RegisterFormI } from 'schemas';
+import REGISTER_VALIDATION_SCHEMA from 'schemas/register/form'
 
 const RegisterForm: FC = () => {
-  const organization = new Organization();
-  const user = new User();
 
   const { setIsSeller, isSeller, setUser, onRegister } = useContext(RegisterCtx);
-  const [entityType, setEntityType] = useState(user.$organization.$type);
+  const [entityType, setEntityType] = useState(defaults.ORG_TYPE);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={entityType}>
       <Form
         initialValues={{
-          ...RegisterService.VALIDATION_SCHEMA.default,
-          // Устанавливаем дефолтные значения, чтобы в случае, если
-          // они останутся дефолтными, они отобразились в данных
           organization: {
-            type: organization.$type,
-            isSeller: organization.$isSeller
+            type: defaults.ORG_TYPE,
+            isSeller: defaults.IS_SELLER
           },
+          phone: '',
           user_agreement: undefined,
           personal_data: undefined,
         } as RegisterFormI}
         validateOnBlur={false}
         validateOnMount={true}
-        validationSchema={RegisterService.VALIDATION_SCHEMA}
+        validationSchema={REGISTER_VALIDATION_SCHEMA(entityType)}
         onSubmit={async (values, form) => {
-          const userData = omit(values, ['user_agreement', 'personal_data']);
+          const userData = omit<RegisterFormI>(values, ['user_agreement', 'personal_data']);
           const { user, code, error } = await RegisterService.register(userData);
 
           if (user) {
@@ -46,30 +43,29 @@ const RegisterForm: FC = () => {
           form.setSubmitting(false);
         }}
       >
-        {({ setFieldValue }) => {
+        {({ values, setFieldValue, setFieldError }) => {
 
           return (
             <Form.Element>
               <Form.Heading>Регистрация</Form.Heading>
 
               <Form.Field.Radio
-                items={Object.values(Organization.types)}
+                items={ORG_TYPES}
                 defaultValue={entityType}
                 name={'organization.type'}
                 onChange={value => {
-                  setEntityType(value as string);
+                  setEntityType(value as OrgType);
                   setFieldValue('organization.type', value);
                 }}
               />
 
               <Form.Field.Radio
-                items={Organization.ROLES}
-                defaultValue={isSeller ? Organization.ROLE_SELLER : Organization.ROLE_BUYER}
+                items={ORG_ROLES}
+                defaultValue={isSeller ? OrgRole.SELLER : OrgRole.BUYER}
                 name={'organization.isSeller'}
-                onChange={value => {
-                  const isSeller = value === Organization.ROLE_SELLER ? true : false
-                  setFieldValue('organization.isSeller', isSeller);
-                  setIsSeller(isSeller)
+                onChange={() => {
+                  setFieldValue('organization.isSeller', !isSeller);
+                  setIsSeller(!isSeller)
                 }}
               />
 
@@ -109,8 +105,8 @@ const RegisterForm: FC = () => {
                 label='ИНН'
                 type='number'
                 min={0}
-                max={9999999999}
-                placeholder='введите номер из 10 цифр'
+                max={entityType === OrgType.Entity ? 9999999999 : 999999999999}
+                placeholder={`введите номер из ${entityType === OrgType.Entity ? 10 : 12} цифр`}
                 name='organization.inn'
               />
 
@@ -125,6 +121,11 @@ const RegisterForm: FC = () => {
                 label='Номер телефона'
                 placeholder='+7-XXX-XXX-XX-XX'
                 maxLength={12}
+                filter={{
+                  rule: get(values, 'phone').length === 0 ? /^\+/ :
+                    get(values, 'phone').length === 1 ? /^\+7/ : null,
+                  callback: () => setFieldError('phone', 'Формат телефона +7-XXX-XXX-XX-XX')
+                }}
                 name='phone'
                 type='tel'
               />
@@ -162,6 +163,7 @@ const RegisterForm: FC = () => {
     </div >
   )
 }
+
 
 RegisterForm.displayName = 'RegisterForm';
 

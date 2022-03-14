@@ -14,7 +14,10 @@ import styles from './Styles.module.scss';
 export interface InputI extends Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'> {
   onChange: (value: any, e: ChangeEvent<HTMLInputElement>) => void,
   className?: string,
-  filter?: RegExp,
+  filter?: {
+    rule: RegExp,
+    callback?: Function
+  },
   invalid?: boolean,
 }
 
@@ -37,8 +40,11 @@ const Input = forwardRef<Ref, InputI>(({
       setInputValue(value);
     }
 
-    if (!filter || filter.test(value)) {
+    if (!filter || !filter.rule || filter.rule.test(value)) {
+      setInputValue(value);
       onChange(value, e);
+    } else {
+      filter.callback && filter.callback();
     }
   }
 

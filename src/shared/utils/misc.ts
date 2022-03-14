@@ -1,4 +1,4 @@
-import { UserI } from "models/User";
+import { UserI } from 'models';
 
 export const formatFio = (fio: Pick<UserI, 'firstName' | 'lastName' | 'patronymicName'>) => {
   const { lastName, firstName, patronymicName } = fio;

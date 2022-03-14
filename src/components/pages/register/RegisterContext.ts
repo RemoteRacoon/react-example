@@ -1,11 +1,14 @@
-import { UserI } from "models/User";
+import { UserI } from "models";
 import { Dispatch, SetStateAction, createContext } from "react";
+import { RegisterFormI } from "schemas";
+
+type UserData = Partial<RegisterFormI> & Pick<UserI, 'confirmCode'>
 
 interface RegisterCtxI {
   isSeller: boolean,
   setIsSeller: Dispatch<SetStateAction<boolean>>,
-  user: Partial<UserI>,
-  setUser: Dispatch<SetStateAction<Partial<UserI>>>,
+  user: UserData,
+  setUser: Dispatch<SetStateAction<UserData>>,
   onRegister: () => any,
 }
 

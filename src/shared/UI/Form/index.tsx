@@ -58,6 +58,7 @@ Heading.displayName = 'FormHeading';
 const handleApiErrors = (error: any, form: FormikHelpers<any>) => {
   if (error.errors) {
     form.setErrors(error.errors);
+    toast.error(error.message);
   } else {
     toast.error(error.message);
   }

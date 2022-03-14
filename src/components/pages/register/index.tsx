@@ -1,18 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import RegisterContext from './RegisterContext';
 import RegisterForm from './RegisterForm';
 import RegisterBanner from './RoleBanner';
-import { Organization } from "models/Organization";
 import RegisterConditions from "./Conditions";
 import styles from './Styles.module.scss';
 import Modal from "@/UI/Modal";
 import useQueryParamModal from "shared/hooks/queryParamModal";
 import ConfirmPhoneModal from "./ConfirmPhone";
-import { UserI } from "models/User";
+import { UserI } from "models";
+import { defaults } from "models/Organization";
 
 const Register: FC = () => {
-  const organization = new Organization();
-  const [isSeller, setIsSeller] = useState(organization.$isSeller);
+  const [isSeller, setIsSeller] = useState(defaults.IS_SELLER);
   const [user, setUser] = useState<UserI>(null);
   const { open, close, isOpen } = useQueryParamModal('confirm-phone');
 

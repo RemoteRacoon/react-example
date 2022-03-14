@@ -12,20 +12,20 @@ import redirect from "shared/utils/redirect";
 import RegisterCtx from "../RegisterContext";
 import Timer from "./Timer";
 import SubmitButton from "@/UI/Form/SubmitButton";
-import useUser from "services/UserService/swr/useUser";
+import getUser from "services/UserService/swr/getUser";
 
 interface ConfirmModalI {
   onConfirm: Function
 }
 
 const ConfirmPhoneModal: FC<ConfirmModalI> = ({ onConfirm }) => {
-  const { user, setUser } = useContext(RegisterCtx);
-  const { mutateUser } = useUser();
+  const { user } = useContext(RegisterCtx);
+  const { mutateUser } = getUser(null, { revalidateOnFocus: false });
   const [, setCookie] = useCookies(['token']);
   const [code] = useState(user?.confirmCode);
 
   const loginAndRedirect = async () => {
-    const { success, error } = await RegisterService.confirm(user?.phone as string, code.toString());
+    const { success, error } = await RegisterService.confirm(user.phone as string, code.toString());
 
     if (success) {
       const { token, error } = await LoginService.login(user.username, user.password);
@@ -75,7 +75,7 @@ const ConfirmPhoneModal: FC<ConfirmModalI> = ({ onConfirm }) => {
                     <Form.Field.Input
                       name="code"
                       placeholder="000000"
-                      disabled={isFormValid(form)}
+                      // disabled={isFormValid(form)}
                       label="Введите код из СМС"
                       className={styles.input}
                     />
